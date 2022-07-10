@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import Filters from '../Login/Filters';
+
 
 const InputSearch = () => {
 
@@ -15,8 +15,7 @@ const InputSearch = () => {
     <form onSubmit={handleSubmit(submit)} className='form-search'>
       <input type="text" placeholder="What are you looking for?" {...register('searchText')} />
       <button>Search</button>
-    </form>
-    <div className="filter-button-container">
+    </form><div className="filter-button-container">
                     <button 
                         className='filter-button'
                         onClick={() => setIsFilterOpen(!isFilterOpen)}
