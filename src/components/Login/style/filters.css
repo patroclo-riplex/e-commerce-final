@@ -118,3 +118,49 @@
         width: 50%;
     }
 }
+
+.search-container {
+    display: block;
+    padding: 0 7rem;
+}
+
+.search-container .form-search {
+    width: 100%;
+}
+
+.form-search input {
+    border: 1.5px solid rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    font-size: 2.3rem;
+    height: 3.5rem;
+    width: calc(100% - 3.5rem);
+}
+
+::placeholder {
+    font-size: 1.8rem;
+    padding-left: 0.5rem;
+}
+
+.form-search {
+    display: flex;
+}
+
+.form-search button {
+    background-color: #e96161;
+    border: none;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    color: #ffffff;
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+
+.column {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 2rem;
+    width: 100%;
+}

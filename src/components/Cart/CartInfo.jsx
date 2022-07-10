@@ -1,48 +1,36 @@
-import React from 'react'
 import axios from 'axios'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { getAllProductsCart } from '../../store/slices/cart.slice'
 import getConfig from '../../utils/getConfig'
 
 const CartInfo = ({productCart}) => {
 
-  const postPurchase = () => {
+  const dispatch = useDispatch()
 
-    const URL = 'https://ecommerce-api-react.herokuapp.com/api/v1/purchases'
+  const deleteProductFromCart = () => {
+    const URL = `https://ecommerce-api-react.herokuapp.com/api/v1/cart/${productCart.id}`
 
-    const objPurchase = {
-      street: "Green St. 1456",
-      colony: "Southwest",
-      zipCode: 12345,
-      city: "USA",
-      references: "Some references"
-    }
-
-    axios.post(URL, objPurchase, getConfig())
-      .then(res => console.log(res.data))
+    axios.delete(URL, getConfig())
+      .then(res => {
+        console.log(res.data)
+        dispatch(getAllProductsCart())
+      })
       .catch(err => console.log(err.data))
   }
 
   return (
-    <li key={productCart.id} onClick={postPurchase} className='cart-item'>
-      <div className="product-text">
-          <div className="product-name">
-               <h3>{productCart.brand}</h3>
-               <h2 id='cart-product-title'>{productCart.title}</h2>
-          </div>
-          <button onClick={() => deleteProduct(product.id)} className='delete-button'><i className="fa-solid fa-trash-can"></i></button>   {/* Cambiar ruta */}
+    <section className='cart-info'>
+      <header className='cart-info__header'>
+        <h4 className='cart-info__subtitle'>{productCart.brand}</h4>
+        <h3 className='cart-info__title'>{productCart.title}</h3>
+      </header>
+      <p className='cart-info__quantity'>{productCart.productsInCart.quantity}</p>
+      <p className='cart-info__price'>$ {productCart.price}</p>
+      <div onClick={deleteProductFromCart} className='cart-info__btn'>
+        <i className="fa-solid fa-trash-can"></i>
       </div>
-      <div className="quantity-details">
-          <input
-              type="text" 
-              id='quantity' 
-              value={productCart.productsInCart.quantity}
-              readOnly
-          />
-          <p className='price-details'>Total: <span>$ {productCart.price}</span></p>
-      </div>
-      <div className="checkout-container">
-          <button onClick={postPurchase} className='checkout-button'>Checkout</button>
-      </div>
-    </li>
+    </section>
   )
 }
 
